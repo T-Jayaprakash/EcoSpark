@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoSpark — Smart Sewage Monitoring System</title>
+  <meta name="description"
+    content="Real-time smart sewage water-level monitoring dashboard aligned with SDG 11 – Sustainable Cities & Communities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+
+  <!-- ─── Header ─────────────────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-left">
+      <div class="logo">💧</div>
+      <div class="logo-text">
+        <h1>EcoSpark</h1>
+        <p>Smart Sewage Monitoring System</p>
+      </div>
+      <span class="sdg-badge">SDG 11 ♻</span>
+    </div>
+    <div class="header-right">
+      <div class="refresh-indicator">
+        <div class="pulse-dot"></div>
+        <span>Live</span>
+      </div>
+      <span id="live-clock"></span>
+    </div>
+  </header>
+
+  <!-- ─── Main ────────────────────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon total">🔌</div>
+        <div>
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Total Lids</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon normal">✅</div>
+        <div>
+          <div class="stat-value" id="stat-normal" style="color:var(--normal)">—</div>
+          <div class="stat-label">Normal</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon warning">⚠️</div>
+        <div>
+          <div class="stat-value" id="stat-warning" style="color:var(--warning)">—</div>
+          <div class="stat-label">Warning</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon critical">🔴</div>
+        <div>
+          <div class="stat-value" id="stat-critical" style="color:var(--critical)">—</div>
+          <div class="stat-label">Critical</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Sensor Cards -->
+    <p class="section-title">📡 Live Sensor Status</p>
+    <div class="cards-grid" id="cards-grid">
+      <div class="loading-state">
+        <div class="spinner"></div>Connecting to sensors…
+      </div>
+    </div>
+
+    <!-- Alerts Panel -->
+    <div class="alerts-section">
+      <p class="section-title">🚨 Active Alerts</p>
+      <div class="alerts-list" id="alerts-list">
+        <div class="loading-state">
+          <div class="spinner"></div>Loading alerts…
+        </div>
+      </div>
+    </div>
+
+    <!-- History Table -->
+    <div class="history-section">
+      <p class="section-title">📊 Recent History</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Lid ID</th>
+              <th>Area</th>
+              <th>Water Level</th>
+              <th>Status</th>
+              <th>Sensor Type</th>
+              <th>Battery</th>
+              <th>Signal</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <tr>
+              <td colspan="8" class="loading-state">Loading history…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+
+</html>
