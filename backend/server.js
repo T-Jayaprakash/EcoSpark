@@ -67,6 +67,53 @@ async function bootstrap() {
     app.use('/api/lids', lidRoutes);
     app.use('/api/alerts', alertRoutes);
 
+    app.post('/api/raw-sensor-data', (req, res) => {
+        const { lid_id, distance_cm, manhole_depth_cm, temperature_c, signal_quality, timestamp } = req.body;
+
+        const depth = manhole_depth_cm || 100;
+        const distance = distance_cm || 0;
+
+        let water_level = ((depth - distance) / depth) * 100;
+        water_level = Math.max(0, Math.min(100, Math.round(water_level)));
+
+        let status = 'NORMAL';
+        if (water_level < 40) {
+            status = 'NORMAL';
+        } else if (water_level >= 40 && water_level <= 70) {
+            status = 'WARNING';
+        } else {
+            status = 'CRITICAL';
+        }
+
+        const processedData = {
+            lid_id,
+            distance_cm: distance,
+            manhole_depth_cm: depth,
+            temperature_c,
+            signal_quality,
+            timestamp: timestamp || new Date().toISOString(),
+            water_level,
+            status
+        };
+
+        io.emit("lid:update", processedData);
+
+        if (status === 'WARNING' || status === 'CRITICAL') {
+            const alertData = {
+                lid_id,
+                status,
+                message: `Water level reached ${water_level}%`,
+                timestamp: processedData.timestamp
+            };
+            io.emit("alert:new", alertData);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Sensor data received"
+        });
+    });
+
     // Health check
     app.get('/health', (_req, res) =>
         res.json({ status: 'ok', time: new Date().toISOString(), db: 'connected' })
@@ -79,6 +126,7 @@ async function bootstrap() {
 
     // ── 5. Start ─────────────────────────────────────────────────────────────────
     server.listen(PORT, () => {
+        console.log(`Backend running on port ${PORT}`);
         console.log(`\n🌊  EcoSpark v2.0 — Smart Sewage Monitoring System`);
         console.log(`🚀  Server    → http://localhost:${PORT}`);
         console.log(`📡  API base  → http://localhost:${PORT}/api`);

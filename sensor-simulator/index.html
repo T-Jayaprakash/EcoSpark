@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Sewage - Real Sensor Simulator</title>
+    <link rel="stylesheet" href="public/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📡 Ultrasonic Sensor Simulator</h1>
+            <p>Smart Sewage Monitoring Platform</p>
+        </header>
+
+        <main class="dashboard">
+            <!-- Left Column: Controls -->
+            <section class="panel controls-panel">
+                <h2>Control Panel</h2>
+
+                <div class="form-group">
+                    <label for="lidSelector">Select Sensor Identity (LID ID)</label>
+                    <select id="lidSelector" class="form-control">
+                        <option value="LID_01">LID_01 (Main Street)</option>
+                        <option value="LID_02">LID_02 (Market Square)</option>
+                        <option value="LID_03">LID_03 (River Boulevard)</option>
+                        <option value="LID_04">LID_04 (Industrial Park)</option>
+                        <option value="LID_05">LID_05 (Residential Zone)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="intervalSelector">Transmission Interval</label>
+                    <select id="intervalSelector" class="form-control">
+                        <option value="2000">2 Seconds (High Frequency)</option>
+                        <option value="5000" selected>5 Seconds (Normal)</option>
+                        <option value="10000">10 Seconds (Power Save)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Target Backend API</label>
+                    <input type="text" id="apiUrl" value="http://localhost:3001/api/raw-sensor-data"
+                        class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="overrideSelector">Level Selector (Pulse Base)</label>
+                    <select id="overrideSelector" class="form-control">
+                        <option value="NORMAL" selected>NORMAL (4000-6000 µs)</option>
+                        <option value="WARNING">WARNING (2500-3500 µs)</option>
+                        <option value="CRITICAL">CRITICAL (800-1500 µs)</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button id="startBtn" class="btn btn-primary">▶ Start Emitting</button>
+                    <button id="stopBtn" class="btn btn-danger" disabled>⏹ Stop Emitting</button>
+                </div>
+
+                <div class="status-indicator">
+                    <div class="status-dot" id="connectionDot"></div>
+                    <span id="connectionStatus">Idle - Ready to start</span>
+                </div>
+            </section>
+
+            <!-- Right Column: Live Data -->
+            <section class="panel live-panel">
+                <div class="panel-header">
+                    <h2>Live Payload Viewer</h2>
+                    <span class="badge" id="txCountBadge">TX: 0</span>
+                </div>
+
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="mac-dot red"></div>
+                        <div class="mac-dot yellow"></div>
+                        <div class="mac-dot green"></div>
+                        <span class="terminal-title">Raw JSON Output</span>
+                    </div>
+                    <pre id="jsonViewer" class="json-viewer">Waiting for simulation to start...</pre>
+                </div>
+
+                <div class="physical-simulation">
+                    <h3>Simulated Physical State</h3>
+                    <div class="state-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Pulse</span>
+                            <span class="metric-value" id="valPulse">-- µs</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Object Distance</span>
+                            <span class="metric-value" id="valDistance">-- cm</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Temperature</span>
+                            <span class="metric-value" id="valTemp">-- °C</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Signal</span>
+                            <span class="metric-value" id="valSignal">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="simulator.js"></script>
+</body>
+
+</html>
