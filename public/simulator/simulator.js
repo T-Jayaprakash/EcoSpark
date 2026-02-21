@@ -14,12 +14,18 @@ const valPulse = document.getElementById('valPulse');
 const valDistance = document.getElementById('valDistance');
 const valTemp = document.getElementById('valTemp');
 const valSignal = document.getElementById('valSignal');
+const multiSensorCheckbox = document.getElementById('multiSensorMode');
 
 // Simulation State
 let simulationInterval = null;
 let txCount = 0;
-let pulse_us = 2941; // equivalent to ~50cm initially value. (50 * 2) / 0.034 = 2941.17
-const manhole_depth_cm = 100; // Fixed physical parameter
+let currentLidIndex = 0; // For multi-sensor mode
+const LIDS = [
+    "MKCE_LID_01", "MKCE_LID_02", "MKCE_LID_03", "MKCE_LID_04", "MKCE_LID_05",
+    "MKCE_LID_06", "MKCE_LID_07", "MKCE_LID_08", "MKCE_LID_09", "MKCE_LID_10"
+];
+let pulse_us = 2941;
+const manhole_depth_cm = 100;
 
 // Start Simulation
 function startSimulation() {
@@ -29,6 +35,8 @@ function startSimulation() {
     intervalSelector.disabled = true;
     apiUrlInput.disabled = true;
     overrideSelector.disabled = true;
+    multiSensorCheckbox.disabled = true;
+    currentLidIndex = 0;
 
     updateStatus('Connecting and Emitting...', 'indicator-active');
 
@@ -46,6 +54,7 @@ function stopSimulation() {
     intervalSelector.disabled = false;
     apiUrlInput.disabled = false;
     overrideSelector.disabled = false;
+    multiSensorCheckbox.disabled = false;
 
     if (simulationInterval) {
         clearInterval(simulationInterval);
@@ -94,8 +103,14 @@ function simulatePhysics(forceMode = null) {
     const signal_quality = Math.random() < 0.85 ? 'GOOD' : 'LOW';
 
     // Prepare exactly the payload requested by backend
+    let lidId = lidSelector.value;
+    if (multiSensorCheckbox.checked && !forceMode) {
+        lidId = LIDS[currentLidIndex];
+        currentLidIndex = (currentLidIndex + 1) % LIDS.length;
+    }
+
     const payload = {
-        lid_id: lidSelector.value,
+        lid_id: lidId,
         distance_cm: distance_cm,
         manhole_depth_cm: manhole_depth_cm,
         temperature_c: temperature_c,

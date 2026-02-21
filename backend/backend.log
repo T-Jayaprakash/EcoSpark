@@ -13,20 +13,6 @@ Backend running on port 3001
 📡  API base  → http://localhost:3001/api
 🔌  Socket.IO → ws://localhost:3001
 
-⚡  Client connected   [LEF8T5vsovCGe7EGAAAB]
-💤  Client disconnected [LEF8T5vsovCGe7EGAAAB]
-⚡  Client connected   [RQ0csPmJiBUJJXY5AAAD]
-💤  Client disconnected [RQ0csPmJiBUJJXY5AAAD]
-⚡  Client connected   [yUsG3qBI3avHvADAAAAF]
-💤  Client disconnected [yUsG3qBI3avHvADAAAAF]
-⚡  Client connected   [vUNO1ijw34Mh2D93AAAH]
-⚡  Client connected   [PgOhSWxeTxxSbn08AAAJ]
-💤  Client disconnected [vUNO1ijw34Mh2D93AAAH]
-⚡  Client connected   [OQFw03d7Z6XoxyoXAAAL]
-⚡  Client connected   [NYn9_uvJrIuYU6yGAAAN]
-⚡  Client connected   [GWf_yJv5ZbQQSahGAAAP]
-💤  Client disconnected [OQFw03d7Z6XoxyoXAAAL]
-⚡  Client connected   [saKpzu4dTpTlMiosAAAR]
-💤  Client disconnected [GWf_yJv5ZbQQSahGAAAP]
-💤  Client disconnected [NYn9_uvJrIuYU6yGAAAN]
-⚡  Client connected   [7zEEhqF6Qo61zfEXAAAT]
+⚡  Client connected   [EHdTAlv6lnziSf4PAAAB]
+⚡  Client connected   [7zu9y7UMKJY3ACYEAAAD]
+💤  Client disconnected [EHdTAlv6lnziSf4PAAAB]
