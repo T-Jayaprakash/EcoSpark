@@ -63,6 +63,11 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
             setLids((prev) => ({ ...prev, [doc.lid_id]: doc }));
         });
 
+        // lid:update → also merge into lids map (from raw-sensor-data flow)
+        socket.on("lid:update", (doc: SensorReading) => {
+            setLids((prev) => ({ ...prev, [doc.lid_id]: doc }));
+        });
+
         // alert:new → prepend to alerts array
         socket.on("alert:new", (alert: Alert) => {
             if (!knownAlertIds.current.has(alert._id)) {

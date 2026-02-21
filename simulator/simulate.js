@@ -7,32 +7,16 @@
 const API_URL = 'http://localhost:3001/api/sensor-data';
 
 const SENSORS = [
-    // ── Zone 1 — Srirangam & North ──
-    { lid_id: 'LID_001', area: 'Srirangam', city: 'Tiruchirappalli', latitude: 10.8560, longitude: 78.6880 },
-    { lid_id: 'LID_002', area: 'Thiruvanaikoil', city: 'Tiruchirappalli', latitude: 10.8450, longitude: 78.7020 },
-
-    // ── Zone 2 — Golden Rock & Ponmalai ──
-    { lid_id: 'LID_003', area: 'Golden Rock', city: 'Tiruchirappalli', latitude: 10.8020, longitude: 78.7310 },
-    { lid_id: 'LID_004', area: 'Ponmalai', city: 'Tiruchirappalli', latitude: 10.7980, longitude: 78.7200 },
-
-    // ── Zone 3 — Woraiyur & Cantonment ──
-    { lid_id: 'LID_005', area: 'Woraiyur', city: 'Tiruchirappalli', latitude: 10.8260, longitude: 78.6830 },
-    { lid_id: 'LID_006', area: 'Cantonment', city: 'Tiruchirappalli', latitude: 10.8320, longitude: 78.6950 },
-
-    // ── Zone 4 — Anna Nagar & Thillai Nagar ──
-    { lid_id: 'LID_007', area: 'Anna Nagar', city: 'Tiruchirappalli', latitude: 10.8155, longitude: 78.6965 },
-    { lid_id: 'LID_008', area: 'Thillai Nagar', city: 'Tiruchirappalli', latitude: 10.8100, longitude: 78.6850 },
-    { lid_id: 'LID_009', area: 'Puthur', city: 'Tiruchirappalli', latitude: 10.8200, longitude: 78.6760 },
-
-    // ── Zone 5 — KK Nagar & Teppakulam ──
-    { lid_id: 'LID_010', area: 'KK Nagar', city: 'Tiruchirappalli', latitude: 10.7950, longitude: 78.7040 },
-    { lid_id: 'LID_011', area: 'Teppakulam', city: 'Tiruchirappalli', latitude: 10.8100, longitude: 78.7100 },
-    { lid_id: 'LID_012', area: 'Palakkarai', city: 'Tiruchirappalli', latitude: 10.8050, longitude: 78.6900 },
-
-    // ── Zone 6 — Ariyamangalam & Crawford ──
-    { lid_id: 'LID_013', area: 'Ariyamangalam', city: 'Tiruchirappalli', latitude: 10.7880, longitude: 78.6720 },
-    { lid_id: 'LID_014', area: 'Crawford', city: 'Tiruchirappalli', latitude: 10.7920, longitude: 78.6830 },
-    { lid_id: 'LID_015', area: 'Kattur', city: 'Tiruchirappalli', latitude: 10.7780, longitude: 78.6950 },
+    { lid_id: 'MKCE_LID_01', area: 'Main Gate Road', city: 'Karur', latitude: 11.0558, longitude: 78.0472 },
+    { lid_id: 'MKCE_LID_02', area: 'Academic Block Road', city: 'Karur', latitude: 11.0550, longitude: 78.0488 },
+    { lid_id: 'MKCE_LID_03', area: 'Central Avenue', city: 'Karur', latitude: 11.0542, longitude: 78.0495 },
+    { lid_id: 'MKCE_LID_04', area: 'Library Road', city: 'Karur', latitude: 11.0535, longitude: 78.0478 },
+    { lid_id: 'MKCE_LID_05', area: 'Workshop Road', city: 'Karur', latitude: 11.0528, longitude: 78.0502 },
+    { lid_id: 'MKCE_LID_06', area: 'Hostel Block Road', city: 'Karur', latitude: 11.0548, longitude: 78.0510 },
+    { lid_id: 'MKCE_LID_07', area: 'Hostel Ring Road', city: 'Karur', latitude: 11.0538, longitude: 78.0520 },
+    { lid_id: 'MKCE_LID_08', area: 'Playground Perimeter Rd', city: 'Karur', latitude: 11.0525, longitude: 78.0465 },
+    { lid_id: 'MKCE_LID_09', area: 'Canteen Road', city: 'Karur', latitude: 11.0560, longitude: 78.0505 },
+    { lid_id: 'MKCE_LID_10', area: 'Back Gate Road', city: 'Karur', latitude: 11.0520, longitude: 78.0490 },
 ];
 
 const SIGNAL_LEVELS = ['EXCELLENT', 'GOOD', 'FAIR', 'WEAK'];
@@ -101,7 +85,7 @@ async function tick() {
 }
 
 // Send immediately, then every 3 seconds
-console.log('🌊  EcoSpark Simulator v2 started — 15 sensors across 6 zones');
+console.log('🌊  EcoSpark Simulator v2 started — 10 sensors across MKCE Campus');
 console.log('     Sending data to', API_URL);
 console.log('     Press Ctrl+C to stop.\n');
 tick();

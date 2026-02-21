@@ -1,0 +1,4 @@
+[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+Sensor Intelligence Layer listening on port 3000
+Received raw sensor data for LID_12
+Error processing sensor data: ANTHROPIC_API_KEY is missing in environment variables.

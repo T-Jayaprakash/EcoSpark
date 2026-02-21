@@ -1,0 +1,28 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.4.1.124:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 495ms
+ GET / 200 in 322ms (compile: 165ms, render: 157ms)
+ GET / 200 in 69ms (compile: 5ms, render: 64ms)
+(node:50904) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ GET /firebase-messaging-sw.js 404 in 83ms (compile: 49ms, render: 34ms)
+ GET / 200 in 45ms (compile: 12ms, render: 33ms)
+ GET /firebase-messaging-sw.js 404 in 38ms (compile: 10ms, render: 27ms)
+ GET / 200 in 46ms (compile: 9ms, render: 37ms)
+ GET /firebase-messaging-sw.js 404 in 38ms (compile: 9ms, render: 28ms)
+ GET / 200 in 49ms (compile: 11ms, render: 39ms)
+ GET /firebase-messaging-sw.js 404 in 38ms (compile: 7ms, render: 30ms)
+ GET / 200 in 51ms (compile: 10ms, render: 41ms)
+ GET /firebase-messaging-sw.js 404 in 45ms (compile: 14ms, render: 31ms)
+ GET / 200 in 54ms (compile: 13ms, render: 42ms)
+ GET /firebase-messaging-sw.js 404 in 47ms (compile: 12ms, render: 34ms)
+ GET / 200 in 48ms (compile: 9ms, render: 38ms)
+ GET /firebase-messaging-sw.js 404 in 40ms (compile: 11ms, render: 29ms)

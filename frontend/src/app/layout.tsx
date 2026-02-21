@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EcoSpark — Smart Sewage Monitoring System",
+  title: "EcoSpark · MKCE Campus — Smart Sewage Monitoring System",
   description:
-    "SDG 11 · Real-time sewage water-level monitoring dashboard with live sensor data, alerts, and analytics.",
+    "SDG 11 · Real-time sewage water-level monitoring for M. Kumarasamy College of Engineering (MKCE), Karur. Live sensor data, weather-aware alerts, and AI-powered analytics.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

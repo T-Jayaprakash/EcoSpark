@@ -7,6 +7,7 @@
  */
 const Alert = require('../models/Alert');
 const socketService = require('./socketService');
+const notificationService = require('./notificationService');
 
 /**
  * Called after status is computed for an incoming reading.
@@ -43,6 +44,20 @@ async function handleAlert({ lid_id, area, city, status, water_level_value, time
 
     // Broadcast the new alert in real time
     socketService.emitAlert(alert.toObject());
+
+    // Trigger Supervisor Notification if CRITICAL
+    if (status === 'CRITICAL') {
+        try {
+            await notificationService.sendCriticalAlert({
+                lid_id,
+                area,
+                water_level_value,
+                timestamp
+            });
+        } catch (err) {
+            console.error('[alertService] Failed to send supervisor notification:', err.message);
+        }
+    }
 
     return alert;
 }

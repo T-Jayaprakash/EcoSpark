@@ -1,0 +1,43 @@
+
+> sensor-intelligence@1.0.0 start
+> node index.js
+
+[dotenv@17.3.1] injecting env (3) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Sensor Intelligence Layer listening on port 3003
+[Weather] Fetched fresh weather data for MKCE Campus
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01
+Received raw sensor data for MKCE_LID_01
+Ollama unavailable: model 'llama3.2' not found. Using local computation.
+Emitted lid:update for MKCE_LID_01 with status NORMAL
+Forwarded data to backend for MKCE_LID_01

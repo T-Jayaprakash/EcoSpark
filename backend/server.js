@@ -30,6 +30,10 @@ async function bootstrap() {
     // ── 1. Database ─────────────────────────────────────────────────────────────
     await connectDB();
 
+    // ── 1b. Seed initial lid data if DB is empty ─────────────────────────────
+    const { seedLids } = require('./src/utils/seedLids');
+    await seedLids();
+
     // ── 2. Express app ───────────────────────────────────────────────────────────
     const app = express();
     app.use(cors({ origin: CORS_ORIGIN }));
@@ -63,55 +67,60 @@ async function bootstrap() {
     });
 
     // ── 4. REST API Routes ───────────────────────────────────────────────────────
+    app.get('/api/notifications', async (req, res) => {
+        try {
+            const notificationService = require('./src/services/notificationService');
+            const data = await notificationService.getNotifications();
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+
     app.use('/api/sensor-data', sensorRoutes);
     app.use('/api/lids', lidRoutes);
     app.use('/api/alerts', alertRoutes);
 
-    app.post('/api/raw-sensor-data', (req, res) => {
-        const { lid_id, distance_cm, manhole_depth_cm, temperature_c, signal_quality, timestamp } = req.body;
+    app.post('/api/raw-sensor-data', async (req, res) => {
+        try {
+            const { lid_id, distance_cm, manhole_depth_cm, temperature_c, signal_quality, timestamp } = req.body;
 
-        const depth = manhole_depth_cm || 100;
-        const distance = distance_cm || 0;
+            const depth = manhole_depth_cm || 100;
+            const distance = distance_cm || 0;
 
-        let water_level = ((depth - distance) / depth) * 100;
-        water_level = Math.max(0, Math.min(100, Math.round(water_level)));
+            let water_level = ((depth - distance) / depth) * 100;
+            water_level = Math.max(0, Math.min(100, Math.round(water_level)));
 
-        let status = 'NORMAL';
-        if (water_level < 40) {
-            status = 'NORMAL';
-        } else if (water_level >= 40 && water_level <= 70) {
-            status = 'WARNING';
-        } else {
-            status = 'CRITICAL';
-        }
+            // Build the payload matching the sensorService / MongoDB schema
+            const payload = {
+                lid_id,
+                location: { area: lid_id, city: 'Karur' },
+                water_level: { value: water_level, unit: 'percentage' },
+                sensor_meta: {
+                    sensor_type: 'ultrasonic',
+                    battery_level: 100,
+                    signal_strength: signal_quality || 'GOOD',
+                },
+                timestamp: timestamp || new Date().toISOString(),
+            };
 
-        const processedData = {
-            lid_id,
-            distance_cm: distance,
-            manhole_depth_cm: depth,
-            temperature_c,
-            signal_quality,
-            timestamp: timestamp || new Date().toISOString(),
-            water_level,
-            status
-        };
+            // Persist to MongoDB + emit sensor:update + handle alerts
+            const sensorService = require('./src/services/sensorService');
+            const { doc, alert, status } = await sensorService.ingestReading(payload);
 
-        io.emit("lid:update", processedData);
+            // Also emit lid:update for any direct listeners
+            io.emit('lid:update', doc.toObject());
 
-        if (status === 'WARNING' || status === 'CRITICAL') {
-            const alertData = {
+            res.status(200).json({
+                success: true,
+                message: 'Sensor data received and persisted',
                 lid_id,
                 status,
-                message: `Water level reached ${water_level}%`,
-                timestamp: processedData.timestamp
-            };
-            io.emit("alert:new", alertData);
+            });
+        } catch (err) {
+            console.error('[raw-sensor-data]', err.message);
+            res.status(500).json({ success: false, error: err.message });
         }
-
-        res.status(200).json({
-            success: true,
-            message: "Sensor data received"
-        });
     });
 
     // Health check
@@ -119,7 +128,12 @@ async function bootstrap() {
         res.json({ status: 'ok', time: new Date().toISOString(), db: 'connected' })
     );
 
-    // SPA catch-all — serve frontend for any non-API route
+    // Simulator Route (explicit)
+    app.get('/simulator', (req, res) => {
+        res.sendFile(path.join(__dirname, '..', 'public', 'simulator', 'index.html'));
+    });
+
+    // SPA catch-all
     app.get('*', (_req, res) => {
         res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
     });

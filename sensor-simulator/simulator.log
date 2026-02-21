@@ -1,0 +1,13 @@
+
+> ecospark-sensor-simulator@1.0.0 dev
+> node src/server.js
+
+
+=================================================
+📡 SENSOR SIMULATOR SERVER is now running!
+=================================================
+🔌 Local URL: http://localhost:3002
+📝 Description: Serves the Web UI to simulate ultrasonic sensors.
+⚠️  Note: Ensure your main backend (port 3001) is running.
+=================================================
+

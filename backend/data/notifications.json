@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1771655982992,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_06 (Hostel Block Road) is at 80.5% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:42.992Z",
+    "lid_id": "MKCE_LID_06",
+    "area": "Hostel Block Road"
+  },
+  {
+    "id": 1771655982287,
+    "from": "EcoSpark System",
+    "to": "+91 54321 09876",
+    "supervisorName": "Karthik P",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_05 (Workshop Road) is at 76.8% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:42.287Z",
+    "lid_id": "MKCE_LID_05",
+    "area": "Workshop Road"
+  },
+  {
+    "id": 1771655981587,
+    "from": "EcoSpark System",
+    "to": "+91 65432 10987",
+    "supervisorName": "Senthil M",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_04 (Library Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:41.587Z",
+    "lid_id": "MKCE_LID_04",
+    "area": "Library Road"
+  },
+  {
+    "id": 1771655980874,
+    "from": "EcoSpark System",
+    "to": "+91 87654 32109",
+    "supervisorName": "Ananth S",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_02 (Academic Block Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:40.874Z",
+    "lid_id": "MKCE_LID_02",
+    "area": "Academic Block Road"
+  },
+  {
+    "id": 1771655980030,
+    "from": "EcoSpark System",
+    "to": "+91 73971 39329",
+    "supervisorName": "Raj Kumar",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_01 (Main Gate Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:40.030Z",
+    "lid_id": "MKCE_LID_01",
+    "area": "Main Gate Road"
+  },
+  {
+    "id": 1771655976279,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_10 (Back Gate Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:36.279Z",
+    "lid_id": "MKCE_LID_10",
+    "area": "Back Gate Road"
+  },
+  {
+    "id": 1771655975714,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_09 (Canteen Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:35.714Z",
+    "lid_id": "MKCE_LID_09",
+    "area": "Canteen Road"
+  },
+  {
+    "id": 1771655975159,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_08 (Playground Perimeter Rd) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:35.159Z",
+    "lid_id": "MKCE_LID_08",
+    "area": "Playground Perimeter Rd"
+  },
+  {
+    "id": 1771655974715,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_07 (Hostel Ring Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:34.715Z",
+    "lid_id": "MKCE_LID_07",
+    "area": "Hostel Ring Road"
+  },
+  {
+    "id": 1771655974002,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_06 (Hostel Block Road) is at 77.3% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:34.002Z",
+    "lid_id": "MKCE_LID_06",
+    "area": "Hostel Block Road"
+  },
+  {
+    "id": 1771655973714,
+    "from": "EcoSpark System",
+    "to": "+91 54321 09876",
+    "supervisorName": "Karthik P",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_05 (Workshop Road) is at 80.4% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:33.714Z",
+    "lid_id": "MKCE_LID_05",
+    "area": "Workshop Road"
+  },
+  {
+    "id": 1771655973399,
+    "from": "EcoSpark System",
+    "to": "+91 65432 10987",
+    "supervisorName": "Senthil M",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_04 (Library Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:33.399Z",
+    "lid_id": "MKCE_LID_04",
+    "area": "Library Road"
+  },
+  {
+    "id": 1771655972510,
+    "from": "EcoSpark System",
+    "to": "+91 87654 32109",
+    "supervisorName": "Ananth S",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_02 (Academic Block Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:32.510Z",
+    "lid_id": "MKCE_LID_02",
+    "area": "Academic Block Road"
+  },
+  {
+    "id": 1771655971705,
+    "from": "EcoSpark System",
+    "to": "+91 73971 39329",
+    "supervisorName": "Raj Kumar",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_01 (Main Gate Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:31.705Z",
+    "lid_id": "MKCE_LID_01",
+    "area": "Main Gate Road"
+  },
+  {
+    "id": 1771655968415,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_10 (Back Gate Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:28.415Z",
+    "lid_id": "MKCE_LID_10",
+    "area": "Back Gate Road"
+  },
+  {
+    "id": 1771655968061,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_09 (Canteen Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:28.061Z",
+    "lid_id": "MKCE_LID_09",
+    "area": "Canteen Road"
+  },
+  {
+    "id": 1771655967709,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_08 (Playground Perimeter Rd) is at 99.8% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:27.709Z",
+    "lid_id": "MKCE_LID_08",
+    "area": "Playground Perimeter Rd"
+  },
+  {
+    "id": 1771655967366,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_07 (Hostel Ring Road) is at 100% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:27.366Z",
+    "lid_id": "MKCE_LID_07",
+    "area": "Hostel Ring Road"
+  },
+  {
+    "id": 1771655966646,
+    "from": "EcoSpark System",
+    "to": "+91 99999 00000",
+    "supervisorName": "General Supervisor",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_06 (Hostel Block Road) is at 74.7% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:26.646Z",
+    "lid_id": "MKCE_LID_06",
+    "area": "Hostel Block Road"
+  },
+  {
+    "id": 1771655966293,
+    "from": "EcoSpark System",
+    "to": "+91 54321 09876",
+    "supervisorName": "Karthik P",
+    "message": "🚨 ECOSPARK CRITICAL: Lid MKCE_LID_05 (Workshop Road) is at 84.1% capacity! Action required.",
+    "timestamp": "2026-02-21T06:39:26.293Z",
+    "lid_id": "MKCE_LID_05",
+    "area": "Workshop Road"
+  }
+]

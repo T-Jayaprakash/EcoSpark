@@ -63,3 +63,42 @@ export async function fetchLidHistory(
     const json = await res.json();
     return json.data ?? [];
 }
+
+/* ── Weather ─────────────────────────────────────────────────────────────── */
+
+export interface CurrentWeather {
+    temperature_2m: number;
+    relative_humidity_2m: number;
+    rain: number;
+    wind_speed_10m: number;
+    weather_code: number;
+    weather_description: string;
+    weather_icon: string;
+    time: string;
+}
+
+export interface DailyForecast {
+    dates: string[];
+    temperature_max: number[];
+    temperature_min: number[];
+    rain_sum: number[];
+    weather_code: number[];
+    weather_descriptions: string[];
+    weather_icons: string[];
+}
+
+export interface WeatherData {
+    current: CurrentWeather;
+    daily: DailyForecast;
+    location: { name: string; lat: number; lng: number };
+}
+
+export async function fetchWeather(): Promise<WeatherData | null> {
+    try {
+        const res = await fetch(`${BASE}/api/weather/full`);
+        const json = await res.json();
+        return json.data ?? null;
+    } catch {
+        return null;
+    }
+}

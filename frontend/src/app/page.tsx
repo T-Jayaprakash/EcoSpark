@@ -7,6 +7,8 @@ import { MapView } from "@/components/dashboard/MapView";
 import { LidGrid } from "@/components/dashboard/LidGrid";
 import { AlertPanel } from "@/components/dashboard/AlertPanel";
 import { HistoryTable } from "@/components/dashboard/HistoryTable";
+import { WeatherPanel } from "@/components/dashboard/WeatherPanel";
+import { LidReportPanel } from "@/components/dashboard/LidReportPanel";
 import { Separator } from "@/components/ui/separator";
 
 export default function DashboardPage() {
@@ -41,20 +43,18 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* ── Header ─────────────────────────────────────────────────────── */}
+      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-lg">
-              💧
-            </div>
+            <img src="/mkce-logo.png" alt="MKCE Logo" className="w-9 h-9 rounded-lg object-contain" />
             <div>
-              <h1 className="text-base font-bold tracking-tight">EcoSpark</h1>
+              <h1 className="text-base font-bold tracking-tight">EcoSpark · MKCE</h1>
               <p className="text-[11px] text-muted-foreground leading-tight">
-                Smart Sewage Monitoring System
+                Smart Sewage Monitoring — MKCE Campus, Karur
               </p>
             </div>
-            <span className="ml-2 px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <span className="ml-2 px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/20">
               SDG 11
             </span>
           </div>
@@ -74,7 +74,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* ── Main Content ───────────────────────────────────────────────── */}
+      {/* Main Content */}
       <main className="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
         {/* Stats */}
         <StatCards
@@ -86,10 +86,15 @@ export default function DashboardPage() {
 
         <Separator className="opacity-30" />
 
+        {/* Section: Weather */}
+        <WeatherPanel />
+
+        <Separator className="opacity-30" />
+
         {/* Section: Map View */}
         <section>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4 flex items-center gap-2">
-            🗺️ Sensor Map
+          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4">
+            Sensor Map
           </h2>
           <div className="h-[420px]">
             <MapView lids={lids} />
@@ -100,8 +105,8 @@ export default function DashboardPage() {
 
         {/* Section: Live Sensor Status */}
         <section>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4 flex items-center gap-2">
-            📡 Live Sensor Status
+          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4">
+            Live Sensor Status
           </h2>
           <LidGrid lids={lids} />
         </section>
@@ -117,12 +122,17 @@ export default function DashboardPage() {
             <HistoryTable lids={lids} />
           </div>
         </div>
+
+        <Separator className="opacity-30" />
+
+        {/* Section: AI-Powered Lid Reports */}
+        <LidReportPanel lids={lids} />
       </main>
 
       {/* Footer */}
       <footer className="border-t border-border/30 mt-8">
         <div className="max-w-[1400px] mx-auto px-6 py-4 text-center text-[11px] text-muted-foreground/50">
-          EcoSpark v2.0 · SDG 11 · Smart Sewage Monitoring System
+          EcoSpark v2.0 · MKCE Campus, Karur · SDG 11 · Smart Sewage Monitoring System
         </div>
       </footer>
     </div>
