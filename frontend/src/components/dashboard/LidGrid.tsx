@@ -3,6 +3,8 @@
 import type { SensorReading } from "@/lib/api";
 import { LidCard } from "./LidCard";
 
+import { Radio } from "lucide-react";
+
 interface LidGridProps {
     lids: Record<string, SensorReading>;
 }
@@ -14,9 +16,12 @@ export function LidGrid({ lids }: LidGridProps) {
 
     if (!arr.length) {
         return (
-            <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
-                <span className="text-4xl mb-3">📡</span>
-                <p className="text-sm">No sensor data yet — start the simulator to see live readings.</p>
+            <div className="flex flex-col items-center justify-center py-24 text-slate-300">
+                <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-6">
+                    <Radio size={32} className="text-slate-200" />
+                </div>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em]">Matrix Offline: No Active Telemetry</p>
+                <p className="text-[10px] font-bold text-slate-400 mt-2">Initialize simulator to stream live diagnostics</p>
             </div>
         );
     }

@@ -1,106 +1,77 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { Zap, CheckCircle2, AlertTriangle, ShieldAlert } from "lucide-react";
 
 interface StatCardProps {
     label: string;
-    value: number;
+    value: number | string;
     icon: React.ReactNode;
     accent: string;
     bgAccent: string;
+    isCritical?: boolean;
 }
 
-function StatCard({ label, value, icon, accent, bgAccent }: StatCardProps) {
+function StatCard({ label, value, icon, accent, bgAccent, isCritical }: StatCardProps) {
     return (
-        <Card className="relative overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm p-5 group hover:border-border transition-all duration-300">
-            <div className="flex items-center gap-4">
-                <div className={`flex items-center justify-center w-12 h-12 rounded-xl ${bgAccent} shrink-0`}>
+        <Card className={`relative overflow-hidden border-slate-200 bg-white p-6 group transition-all duration-500 hover:border-cyan-200 hover:shadow-xl hover:-translate-y-1 ${isCritical && value as number > 0 ? 'ring-2 ring-red-500/10 shadow-[0_0_30px_rgba(239,68,68,0.1)]' : 'shadow-sm'}`}>
+            <div className="flex justify-between items-start mb-4">
+                <div className={`flex items-center justify-center w-10 h-10 rounded-xl ${bgAccent} border border-transparent group-hover:border-white/50 transition-all`}>
                     {icon}
                 </div>
-                <div>
-                    <p className="text-sm font-medium text-muted-foreground tracking-wide uppercase">
-                        {label}
-                    </p>
-                    <p className={`text-3xl font-bold tracking-tight ${accent}`}>
-                        {value}
-                    </p>
-                </div>
+                {isCritical && value as number > 0 && (
+                    <div className="flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-2.5 w-2.5 rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
+                    </div>
+                )}
             </div>
-            <div className={`absolute bottom-0 left-0 right-0 h-[2px] ${bgAccent} opacity-40`} />
+            <div>
+                <p className={`text-4xl font-black tracking-tighter transition-all ${accent}`}>
+                    {value}
+                </p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mt-1.5">
+                    {label}
+                </p>
+            </div>
+
+            {/* Visual bottom accent */}
+            <div className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-${accent.split('-')[1] || 'cyan'}-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
         </Card>
     );
 }
 
-/* Simple SVG icons to replace emojis */
-function SensorIcon() {
+export function StatCards({ total, normal, warning, critical }: { total: number, normal: number, warning: number, critical: number }) {
     return (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-600">
-            <circle cx="12" cy="12" r="2" /><path d="M16.24 7.76a6 6 0 0 1 0 8.49" /><path d="M7.76 16.24a6 6 0 0 1 0-8.49" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /><path d="M4.93 19.07a10 10 0 0 1 0-14.14" />
-        </svg>
-    );
-}
-
-function CheckIcon() {
-    return (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600">
-            <path d="M20 6L9 17l-5-5" />
-        </svg>
-    );
-}
-
-function AlertTriangleIcon() {
-    return (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-        </svg>
-    );
-}
-
-function AlertCircleIcon() {
-    return (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-600">
-            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-    );
-}
-
-interface StatCardsProps {
-    total: number;
-    normal: number;
-    warning: number;
-    critical: number;
-}
-
-export function StatCards({ total, normal, warning, critical }: StatCardsProps) {
-    return (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard
                 label="Total Lids"
                 value={total}
-                icon={<SensorIcon />}
-                accent="text-foreground"
-                bgAccent="bg-primary/10"
+                icon={<Zap size={20} className="text-blue-600" />}
+                accent="text-slate-900"
+                bgAccent="bg-blue-50"
             />
             <StatCard
-                label="Normal"
+                label="Stable"
                 value={normal}
-                icon={<CheckIcon />}
+                icon={<CheckCircle2 size={20} className="text-emerald-600" />}
                 accent="text-emerald-600"
-                bgAccent="bg-emerald-500/10"
+                bgAccent="bg-emerald-50"
             />
             <StatCard
-                label="Warning"
+                label="Warnings"
                 value={warning}
-                icon={<AlertTriangleIcon />}
+                icon={<AlertTriangle size={20} className="text-amber-600" />}
                 accent="text-amber-600"
-                bgAccent="bg-amber-500/10"
+                bgAccent="bg-amber-50"
             />
             <StatCard
                 label="Critical"
                 value={critical}
-                icon={<AlertCircleIcon />}
+                icon={<ShieldAlert size={20} className="text-red-600" />}
                 accent="text-red-600"
-                bgAccent="bg-red-500/10"
+                bgAccent="bg-red-50"
+                isCritical
             />
         </div>
     );

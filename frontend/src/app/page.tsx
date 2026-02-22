@@ -9,24 +9,19 @@ import { AlertPanel } from "@/components/dashboard/AlertPanel";
 import { HistoryTable } from "@/components/dashboard/HistoryTable";
 import { WeatherPanel } from "@/components/dashboard/WeatherPanel";
 import { LidReportPanel } from "@/components/dashboard/LidReportPanel";
-import { Separator } from "@/components/ui/separator";
+import { LayoutGrid, Map as MapIcon, BarChart3, Settings, Activity, ShieldAlert } from "lucide-react";
 
 export default function DashboardPage() {
   const { connected, lids, alerts } = useSocketData();
   const [clock, setClock] = useState("");
 
-  // Live clock
   useEffect(() => {
     function tick() {
       const now = new Date();
       setClock(
         now.toLocaleTimeString("en-IN", { hour12: false }) +
-        " — " +
-        now.toLocaleDateString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        })
+        " • " +
+        now.toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
       );
     }
     tick();
@@ -34,7 +29,6 @@ export default function DashboardPage() {
     return () => clearInterval(id);
   }, []);
 
-  // Compute stats
   const arr = Object.values(lids);
   const counts = { NORMAL: 0, WARNING: 0, CRITICAL: 0 };
   arr.forEach((d) => {
@@ -42,99 +36,109 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/mkce-logo.png" alt="MKCE Logo" className="w-9 h-9 rounded-lg object-contain" />
-            <div>
-              <h1 className="text-base font-bold tracking-tight">EcoSpark · MKCE</h1>
-              <p className="text-[11px] text-muted-foreground leading-tight">
-                Smart Sewage Monitoring — MKCE Campus, Karur
-              </p>
-            </div>
-            <span className="ml-2 px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/20">
-              SDG 11
-            </span>
+    <div className="flex min-h-screen bg-[#f8fafc] text-slate-900 selection:bg-cyan-500/30">
+
+      {/* Premium Mini Sidebar (Light Theme) */}
+      <aside className="w-20 hidden md:flex flex-col items-center py-8 gap-10 border-r border-slate-200 bg-white sticky top-0 h-screen shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-[0_8px_16px_rgba(6,182,212,0.25)]">
+          <Activity size={24} />
+        </div>
+
+        <div className="mt-auto">
+          <div className="w-10 h-10 rounded-full border border-slate-200 p-0.5 hover:border-cyan-500 cursor-pointer transition-all">
+            <img src="/mkce-logo.png" className="rounded-full" alt="User" />
+          </div>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col relative">
+        {/* Background Decorative Image */}
+        <div className="absolute top-0 right-0 w-full h-[500px] pointer-events-none opacity-[0.4] overflow-hidden">
+          <img src="/hero-bg.png" className="w-full h-full object-cover object-right-top mask-linear-b" alt="" />
+        </div>
+
+        {/* Premium Header */}
+        <header className="h-24 sticky top-0 z-50 px-8 flex items-center justify-between backdrop-blur-md border-b border-slate-200 bg-white/80">
+          <div>
+            <h1 className="text-2xl font-black tracking-tighter flex items-center gap-2 text-slate-900">
+              EcoSpark <span className="text-cyan-600">•</span> <span className="text-slate-400">MKCE</span>
+            </h1>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-0.5">
+              Infrastructure Intelligence Platform
+            </p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span
-                className={`w-2 h-2 rounded-full ${connected ? "bg-emerald-500 animate-pulse" : "bg-red-500"
-                  }`}
-              />
-              <span>{connected ? "Live" : "Connecting..."}</span>
+          <div className="flex items-center gap-6">
+            <div className="bg-slate-50 border border-slate-200 rounded-full px-5 py-2 flex items-center gap-3">
+              <div className={`w-2 h-2 rounded-full ${connected ? "bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.4)] animate-pulse" : "bg-red-500"}`} />
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-600">{connected ? "System Active" : "Offline"}</span>
             </div>
-            <span className="text-xs text-muted-foreground font-mono tabular-nums" suppressHydrationWarning>
+            <div className="text-[11px] font-black font-mono text-slate-600 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
               {clock}
-            </span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="max-w-[1400px] mx-auto px-6 py-6 space-y-6">
-        {/* Stats */}
-        <StatCards
-          total={arr.length}
-          normal={counts.NORMAL}
-          warning={counts.WARNING}
-          critical={counts.CRITICAL}
-        />
+        {/* Dash Scroll Area */}
+        <main className="p-8 space-y-10 max-w-[1600px] mx-auto w-full relative z-10">
 
-        <Separator className="opacity-30" />
+          {/* Section 1: Key Metrics */}
+          <StatCards
+            total={arr.length}
+            normal={counts.NORMAL}
+            warning={counts.WARNING}
+            critical={counts.CRITICAL}
+          />
 
-        {/* Section: Weather */}
-        <WeatherPanel />
-
-        <Separator className="opacity-30" />
-
-        {/* Section: Map View */}
-        <section>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4">
-            Sensor Map
-          </h2>
-          <div className="h-[420px]">
-            <MapView lids={lids} />
+          {/* Section 2: Environment & Analytics */}
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+            <div className="xl:col-span-8 space-y-8">
+              <div className="flex items-center gap-4">
+                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-cyan-600">Campus Sensor Map</h2>
+                <div className="h-px flex-1 bg-slate-200"></div>
+              </div>
+              <div className="h-[430px] rounded-3xl overflow-hidden border border-slate-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white">
+                <MapView lids={lids} />
+              </div>
+            </div>
+            <div className="xl:col-span-4 space-y-8">
+              <div className="flex items-center gap-4">
+                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Environmental Data</h2>
+              </div>
+              <WeatherPanel />
+            </div>
           </div>
-        </section>
 
-        <Separator className="opacity-30" />
-
-        {/* Section: Live Sensor Status */}
-        <section>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground mb-4">
-            Live Sensor Status
-          </h2>
-          <LidGrid lids={lids} />
-        </section>
-
-        <Separator className="opacity-30" />
-
-        {/* Section: Alerts + History side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-2">
-            <AlertPanel alerts={alerts} />
+          {/* Section 3: Sensor Grid */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Active Node Matrix</h2>
+              <div className="h-px flex-1 bg-slate-200"></div>
+            </div>
+            <LidGrid lids={lids} />
           </div>
-          <div className="lg:col-span-3">
-            <HistoryTable lids={lids} />
+
+          {/* Section 4: Telemetry & Log stream */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4">
+              <AlertPanel alerts={alerts} />
+            </div>
+            <div className="lg:col-span-8">
+              <HistoryTable lids={lids} />
+            </div>
           </div>
-        </div>
 
-        <Separator className="opacity-30" />
+          {/* Section 5: Intelligence Insights */}
+          <LidReportPanel lids={lids} />
 
-        {/* Section: AI-Powered Lid Reports */}
-        <LidReportPanel lids={lids} />
-      </main>
+        </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border/30 mt-8">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 text-center text-[11px] text-muted-foreground/50">
-          EcoSpark v2.0 · MKCE Campus, Karur · SDG 11 · Smart Sewage Monitoring System
-        </div>
-      </footer>
+        <footer className="p-8 border-t border-slate-200 bg-white text-center">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+            © 2026 EcoSpark Engineering • Karur Campus Operation
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }

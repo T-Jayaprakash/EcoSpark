@@ -61,13 +61,3 @@ export function timeAgo(iso: string) {
     return `${Math.round(s / 3600)}h ago`;
 }
 
-export function statusIcon(status: string) {
-    switch (status) {
-        case "CRITICAL":
-            return "🔴";
-        case "WARNING":
-            return "🟡";
-        default:
-            return "🟢";
-    }
-}

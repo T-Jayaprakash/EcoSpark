@@ -1,13 +1,13 @@
 :root {
-    --bg-deep: #06080f;
-    --bg-surface: #0c111d;
-    --bg-card: #151b28;
-    --accent: #00f2ff;
-    --accent-glow: rgba(0, 242, 255, 0.2);
-    --border: rgba(255, 255, 255, 0.08);
-    --text: #f1f5f9;
-    --text-sec: #94a3b8;
-    --radius: 16px;
+    --bg-deep: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-card: #ffffff;
+    --accent: #0ea5e9;
+    --accent-glow: rgba(14, 165, 233, 0.15);
+    --border: rgba(0, 0, 0, 0.08);
+    --text: #0f172a;
+    --text-sec: #64748b;
+    --radius: 20px;
     --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -41,8 +41,9 @@ header h1 {
     font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -1.5px;
-    background: linear-gradient(135deg, #fff 0%, #00f2ff 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -63,7 +64,7 @@ header p {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 32px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 h2 {
@@ -89,11 +90,11 @@ label {
 
 .form-control {
     width: 100%;
-    background: #0d121c;
+    background: #f1f5f9;
     border: 1px solid var(--border);
     padding: 12px 16px;
-    border-radius: 10px;
-    color: #fff;
+    border-radius: 12px;
+    color: var(--text);
     font-family: inherit;
     font-size: 0.9rem;
     outline: none;
@@ -137,9 +138,9 @@ label {
 }
 
 .btn-danger {
-    background: rgba(255, 45, 85, 0.1);
-    color: #ff2d55;
-    border: 1px solid rgba(255, 45, 85, 0.2);
+    background: #fff;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
 }
 
 .btn-danger:not(:disabled):hover {
@@ -169,9 +170,9 @@ label {
 }
 
 .metric {
-    background: #0d121c;
+    background: #f8fafc;
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid var(--border);
 }
 
@@ -191,18 +192,19 @@ label {
 
 /* Terminal */
 .terminal-container {
-    background: #04060b;
-    border-radius: 12px;
-    padding: 16px;
+    background: #0f172a;
+    border-radius: 16px;
+    padding: 20px;
     height: 300px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 1px solid #1e293b;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .json-viewer {
     font-family: 'JetBrains Mono', 'Menlo', monospace;
     font-size: 0.8rem;
-    color: #00ffaa;
+    color: #38bdf8;
     white-space: pre-wrap;
     line-height: 1.5;
 }

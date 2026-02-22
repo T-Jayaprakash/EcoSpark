@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 # EcoSpark Sensor Simulator (Python version)
 # Simulates 10 sensor nodes across MKCE Campus, Karur.
 
-API_URL = 'http://localhost:3001/api/sensor-data'
+API_URL = 'http://localhost:3003/api/raw-sensor-data'
 
 SENSORS = [
     {'lid_id': 'MKCE_LID_01', 'area': 'Main Gate Road', 'city': 'Karur', 'latitude': 11.0558, 'longitude': 78.0472},
@@ -22,13 +22,17 @@ SENSORS = [
     {'lid_id': 'MKCE_LID_10', 'area': 'Back Gate Road', 'city': 'Karur', 'latitude': 11.0520, 'longitude': 78.0490},
 ]
 
+# Depth of all manholes in CM
+MANHOLE_DEPTH = 100
+
 SIGNAL_LEVELS = ['EXCELLENT', 'GOOD', 'FAIR', 'WEAK']
 
-# Initialize sensor states
+# Initialize sensor states (distance from sensor to water)
+# 100 = empty, 5 = full
 sensor_state = {
     s['lid_id']: {
-        'current': random.uniform(10, 80),
-        'trend': random.uniform(-2, 2)
+        'current_dist': random.uniform(20, 90),
+        'trend': random.uniform(-1, 1)
     } for s in SENSORS
 }
 
@@ -38,33 +42,23 @@ def clamp(v, min_v, max_v):
 def build_payload(sensor):
     state = sensor_state[sensor['lid_id']]
     
-    # Drift the water level
-    state['trend'] += random.uniform(-1, 1)
-    state['trend'] = clamp(state['trend'], -5, 5)
-    state['current'] = clamp(state['current'] + state['trend'], 0, 100)
+    # Drift the distance (simulate water level moving)
+    state['trend'] += random.uniform(-0.5, 0.5)
+    state['trend'] = clamp(state['trend'], -3, 3)
+    # Reducing distance means water is rising
+    state['current_dist'] = clamp(state['current_dist'] - state['trend'], 5, 100)
     
     # Random spikes
     if random.random() < 0.05:
-        state['current'] = clamp(state['current'] + (30 if random.random() > 0.5 else -30), 0, 100)
+        state['current_dist'] = clamp(state['current_dist'] + (20 if random.random() > 0.5 else -20), 5, 100)
         
     return {
         "lid_id": sensor['lid_id'],
-        "location": {
-            "area": sensor['area'],
-            "city": sensor['city'],
-            "latitude": sensor['latitude'],
-            "longitude": sensor['longitude']
-        },
-        "water_level": {
-            "value": round(state['current'], 1),
-            "unit": "percentage"
-        },
-        "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-        "sensor_meta": {
-            "sensor_type": "ultrasonic",
-            "battery_level": random.randint(70, 100),
-            "signal_strength": random.choice(SIGNAL_LEVELS)
-        }
+        "distance_cm": round(state['current_dist'], 1),
+        "manhole_depth_cm": MANHOLE_DEPTH,
+        "temperature_c": random.randint(28, 42),
+        "signal_quality": random.choice(SIGNAL_LEVELS),
+        "timestamp": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
     }
 
 def send_data(sensor):
@@ -74,15 +68,19 @@ def send_data(sensor):
         response.raise_for_status()
         data = response.json()
         
-        status = data.get('status', 'NORMAL')
-        icon = '🔴' if status == 'CRITICAL' else '🟡' if status == 'WARNING' else '🟢'
+        # Get interpreted data back from Intelligence layer
+        interpreted = data.get('data', {})
+        status = interpreted.get('status', 'NORMAL')
+        water_level = interpreted.get('water_level_percentage', '--')
         
-        print(f"{icon} [{sensor['lid_id']}] {sensor['area']:<22} | {payload['water_level']['value']:>5}% | {status}")
+        indicator = '[!!]' if status == 'CRITICAL' else '[! ]' if status == 'WARNING' else '[  ]'
+        
+        print(f"{indicator} {sensor['lid_id']:<12} | {sensor['area']:<22} | {water_level:>5}% | {status}")
     except Exception as e:
-        print(f"❌ [{sensor['lid_id']}] Failed: {str(e)}")
+        print(f"[-] {sensor['lid_id']:<12} Failed: {str(e)}")
 
 def main():
-    print("🌊 EcoSpark Python Simulator started — 10 MKCE sensors")
+    print("EcoSpark Python Simulator started — 10 MKCE sensors")
     print(f"   Target: {API_URL}")
     print("   Press Ctrl+C to stop.\n")
     
